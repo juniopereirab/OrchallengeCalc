@@ -1,0 +1,17 @@
+.buttons {
+    display: flex;
+    width: 40%;
+    height: 50vh;
+    flex-wrap: wrap;
+}
+
+.buttons button {
+    width: 25%;
+    height: 20%;
+    font-size: 1.5rem;
+}
+
+.buttons button#clear {
+    width: 100%;
+    height: 10%;
+}

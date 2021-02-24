@@ -1,0 +1,42 @@
+.display-toolbar{
+    width: 40%;
+    display: flex;
+    flex-flow: column;
+    align-items: flex-end;
+}
+
+.display {
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+}
+
+.display-formula,
+.display-input {
+  width: 100%;
+  resize: none;
+  font-family: Nunito Sans, Helvetica, Arial, sans-serif;
+  border: none;
+  outline: none;
+  text-align: right;
+  background-color: inherit;
+}
+
+.display-formula {
+    flex-grow: 1;
+    font-size: 2rem;
+}
+
+.display-input {
+    flex-shrink: 0;
+    font-size: 1.75rem;
+    color: #888;
+    white-space: nowrap;
+    padding-bottom: 15px;
+}
+
+.backspace {
+    width: 25%;
+    height: 50px;
+    font-size: 1.5rem;
+}
