@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
 import Buttons from './components/Buttons';
 import Display from './components/Display';
 import * as Calculator from './calculator';
@@ -6,64 +6,39 @@ import './App.css';
 
 function App() {
 
-  const [formula, setFormula] = useState([]);
-  const [input, setInput] = ('0');
-  const [afterCalculation, setAfterCalculation] = useState(false);
-  const inputEl = useRef(null);
+  const [result, setResult] = useState('');
 
-  const onClear = () => {
-    console.log('limpou');
-  }
-
-  const onEqual = () => {
-    console.log('igual');
-  }
-
-  const onDigit = ({ target }) => {
-    console.log(inputEl.current);
-    const digit = target.innerText;
-    
-    if(afterCalculation){
-      setInput(digit);
-      setAfterCalculation(false);
+  const calculate = () => {
+    try {
+      setResult(eval(result) || "") + ""
+    } catch (e) {
+      setResult("error");
     }
-    else if(input === '0') {
-      setInput(digit);
-    }
-    else if(Calculator.isNotNumber(input)){
-      setInput(digit);
-      const newFormula = formula.concat(input)
-      setFormula(newFormula);
-    }
-    else{
-      const newInput = input.concat(digit);
-      setInput(newInput);
-    }
-    console.log('digito');
   }
 
-  const onOperator = () => {
-    console.log();
+  const reset = () => {
+    setResult('');
   }
 
-  const onBackspace = () => {
-    console.log('apagou');
+  const onClick = button => {
+    if(button === '='){
+      calculate();
+    }
+    else if(button === 'CLEAR'){
+      reset();
+    }
+    else {
+      var resultado = result + button;
+      setResult(resultado); 
+    }
   }
+
   return (
     <div className="App">
       <h1>Calculadora Orc Muito Bolada</h1>
-      <Display
-        formula={formula}
-        input={input}
-        onBackspace={() => onBackspace()}
-      />
-
-      <Buttons 
-        onClear={() => onClear()}
-        onDigit={() => onDigit()}
-        onEqual={() => onEqual()}
-        onOperator={() => onOperator()}
-        ref={inputEl}
+      <div className="overlay"></div>
+      <Display result={result} />
+      <Buttons onClick={onClick}
       />
     </div>
   );

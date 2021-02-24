@@ -29862,41 +29862,92 @@ function Buttons(props) {
   return _react.default.createElement("div", {
     className: "buttons"
   }, _react.default.createElement("button", {
+    name: "CLEAR",
     id: "clear",
-    onClick: props.onClear
+    onClick: function onClick(e) {
+      return props.onClick(e.target.name);
+    }
   }, "CLEAR"), _react.default.createElement("button", {
-    onClick: props.onDigit
+    name: "7",
+    onClick: function onClick(e) {
+      return props.onClick(e.target.name);
+    }
   }, "7"), _react.default.createElement("button", {
-    onClick: props.onDigit
+    name: "8",
+    onClick: function onClick(e) {
+      return props.onClick(e.target.name);
+    }
   }, "8"), _react.default.createElement("button", {
-    onClick: props.onDigit
+    name: "9",
+    onClick: function onClick(e) {
+      return props.onClick(e.target.name);
+    }
   }, "9"), _react.default.createElement("button", {
-    onClick: props.onOperator
+    name: "/",
+    onClick: function onClick(e) {
+      return props.onClick(e.target.name);
+    }
   }, "/"), _react.default.createElement("button", {
-    onClick: props.onDigit
+    name: "4",
+    onClick: function onClick(e) {
+      return props.onClick(e.target.name);
+    }
   }, "4"), _react.default.createElement("button", {
-    onClick: props.onDigit
+    name: "5",
+    onClick: function onClick(e) {
+      return props.onClick(e.target.name);
+    }
   }, "5"), _react.default.createElement("button", {
-    onClick: props.onDigit
+    name: "6",
+    onClick: function onClick(e) {
+      return props.onClick(e.target.name);
+    }
   }, "6"), _react.default.createElement("button", {
-    onClick: props.onOperator
+    name: "*",
+    onClick: function onClick(e) {
+      return props.onClick(e.target.name);
+    }
   }, "*"), _react.default.createElement("button", {
-    onClick: props.onDigit
+    name: "1",
+    onClick: function onClick(e) {
+      return props.onClick(e.target.name);
+    }
   }, "1"), _react.default.createElement("button", {
-    onClick: props.onDigit
+    name: "2",
+    onClick: function onClick(e) {
+      return props.onClick(e.target.name);
+    }
   }, "2"), _react.default.createElement("button", {
-    onClick: props.onDigit
+    name: "3",
+    onClick: function onClick(e) {
+      return props.onClick(e.target.name);
+    }
   }, "3"), _react.default.createElement("button", {
-    onClick: props.onOperator
+    name: "-",
+    onClick: function onClick(e) {
+      return props.onClick(e.target.name);
+    }
   }, "-"), _react.default.createElement("button", {
-    onClick: props.onDigit
+    name: "0",
+    onClick: function onClick(e) {
+      return props.onClick(e.target.name);
+    }
   }, "0"), _react.default.createElement("button", {
-    onClick: props.onDecimal
+    name: ".",
+    onClick: function onClick(e) {
+      return props.onClick(e.target.name);
+    }
   }, "."), _react.default.createElement("button", {
+    name: "=",
     id: "equal",
-    onClick: props.onEqual
+    onClick: function onClick(e) {
+      return props.onClick(e.target.name);
+    }
   }, "="), _react.default.createElement("button", {
-    onClick: props.onOperator
+    name: "+",
+    onClick: function onClick(e) {
+      return props.onClick(e.target.name);
+    }
   }, "+"));
 }
 
@@ -29922,26 +29973,10 @@ require("./Display.css");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function Display(props) {
-  var onTextareaChange = function onTextareaChange() {};
-
+  var result = props.result;
   return _react.default.createElement("div", {
-    className: "display-toolbar"
-  }, _react.default.createElement("form", {
-    className: "display"
-  }, _react.default.createElement("textarea", {
-    className: "display-formula",
-    onChange: onTextareaChange,
-    value: props.formula.join("")
-  }), _react.default.createElement("textarea", {
-    className: "display-input",
-    id: "display",
-    rows: "1",
-    onChange: onTextareaChange,
-    value: props.input
-  })), _react.default.createElement("button", {
-    className: "backspace",
-    onClick: props.onBackspace
-  }, "Backspace"));
+    className: "result"
+  }, _react.default.createElement("p", null, result));
 }
 
 var _default = Display;
@@ -30102,83 +30137,42 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function App() {
-  var _useState = (0, _react.useState)([]),
+  var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
-      formula = _useState2[0],
-      setFormula = _useState2[1];
+      result = _useState2[0],
+      setResult = _useState2[1];
 
-  var _ = '0',
-      _ref = _slicedToArray(_, 2),
-      input = _ref[0],
-      setInput = _ref[1];
-
-  var _useState3 = (0, _react.useState)(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      afterCalculation = _useState4[0],
-      setAfterCalculation = _useState4[1];
-
-  var inputEl = (0, _react.useRef)(null);
-
-  var _onClear = function onClear() {
-    console.log('limpou');
-  };
-
-  var _onEqual = function onEqual() {
-    console.log('igual');
-  };
-
-  var _onDigit = function onDigit(_ref2) {
-    var target = _ref2.target;
-    console.log(inputEl.current);
-    var digit = target.innerText;
-
-    if (afterCalculation) {
-      setInput(digit);
-      setAfterCalculation(false);
-    } else if (input === '0') {
-      setInput(digit);
-    } else if (Calculator.isNotNumber(input)) {
-      setInput(digit);
-      var newFormula = formula.concat(input);
-      setFormula(newFormula);
-    } else {
-      var newInput = input.concat(digit);
-      setInput(newInput);
+  var calculate = function calculate() {
+    try {
+      setResult(eval(result) || "") + "";
+    } catch (e) {
+      setResult("error");
     }
-
-    console.log('digito');
   };
 
-  var _onOperator = function onOperator() {
-    console.log();
+  var reset = function reset() {
+    setResult('');
   };
 
-  var _onBackspace = function onBackspace() {
-    console.log('apagou');
+  var onClick = function onClick(button) {
+    if (button === '=') {
+      calculate();
+    } else if (button === 'CLEAR') {
+      reset();
+    } else {
+      var resultado = result + button;
+      setResult(resultado);
+    }
   };
 
   return _react.default.createElement("div", {
     className: "App"
-  }, _react.default.createElement("h1", null, "Calculadora Orc Muito Bolada"), _react.default.createElement(_Display.default, {
-    formula: formula,
-    input: input,
-    onBackspace: function onBackspace() {
-      return _onBackspace();
-    }
+  }, _react.default.createElement("h1", null, "Calculadora Orc Muito Bolada"), _react.default.createElement("div", {
+    className: "overlay"
+  }), _react.default.createElement(_Display.default, {
+    result: result
   }), _react.default.createElement(_Buttons.default, {
-    onClear: function onClear() {
-      return _onClear();
-    },
-    onDigit: function onDigit() {
-      return _onDigit();
-    },
-    onEqual: function onEqual() {
-      return _onEqual();
-    },
-    onOperator: function onOperator() {
-      return _onOperator();
-    },
-    ref: inputEl
+    onClick: onClick
   }));
 }
 

@@ -1,42 +1,13 @@
-.display-toolbar{
+.result {
     width: 40%;
+    height: 20vh;
+    background-color: white;
     display: flex;
-    flex-flow: column;
-    align-items: flex-end;
-}
-
-.display {
-    width: 100%;
-    display: flex;
-    flex-flow: column;
-}
-
-.display-formula,
-.display-input {
-  width: 100%;
-  resize: none;
-  font-family: Nunito Sans, Helvetica, Arial, sans-serif;
-  border: none;
-  outline: none;
-  text-align: right;
-  background-color: inherit;
-}
-
-.display-formula {
-    flex-grow: 1;
-    font-size: 2rem;
-}
-
-.display-input {
-    flex-shrink: 0;
-    font-size: 1.75rem;
-    color: #888;
-    white-space: nowrap;
-    padding-bottom: 15px;
-}
-
-.backspace {
-    width: 25%;
-    height: 50px;
-    font-size: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    box-shadow: 2px 2px 10px rgba(0,0,0, 0.5);
+    border-radius: 10px 10px 0 0;
 }
